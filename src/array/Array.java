@@ -49,6 +49,10 @@ public class Array<E> {
         return data.length;
     }
 
+    /**
+     * 判断数组是否为空
+     * @return boolean 是否为空
+     */
     public boolean isEmpty() {
         return size == 0;
     }
@@ -78,7 +82,7 @@ public class Array<E> {
     /**
      * 向数组中添加元素e
      *
-     * @param e
+     * @param e 要添加的元素
      */
     public void add(E e) {
         add(size, e);
@@ -87,7 +91,7 @@ public class Array<E> {
     /**
      * 向数组的第零个位置添加元素e
      *
-     * @param e
+     * @param e 元素
      */
     public void addFirst(E e) {
         add(0, e);
@@ -96,8 +100,8 @@ public class Array<E> {
     /**
      * 获取index位置的元素
      *
-     * @param index
-     * @return E
+     * @param index 索引
+     * @return E 元素
      */
     public E get(int index) {
         if (index < 0 || index >= size) {
@@ -107,10 +111,26 @@ public class Array<E> {
     }
 
     /**
+     * 获取数组中的第一个元素
+     * @return 元素
+     */
+    public E getFirst() {
+        return get(0);
+    }
+
+    /**
+     * 获取数组中的最后一个元素
+     * @return E 元素
+     */
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    /**
      * 修改index索引位置的元素为e
      *
-     * @param index
-     * @param e
+     * @param index 索引
+     * @param e 元素
      */
     public void set(int index, E e) {
         if (index < 0 || index >= size) {
@@ -122,8 +142,8 @@ public class Array<E> {
     /**
      * 查找数组中是否含有元素e
      *
-     * @param e
-     * @return
+     * @param e 元素
+     * @return boolean 布尔
      */
     public boolean contains(E e) {
         if (isEmpty()) {
@@ -140,8 +160,8 @@ public class Array<E> {
     /**
      * 查找数组中是否含有元素e, 并返回第一个索引
      *
-     * @param e
-     * @return index
+     * @param e 元素e
+     * @return index 索引
      */
     public int find(E e) {
         if (isEmpty()) {
@@ -158,7 +178,8 @@ public class Array<E> {
     /**
      * 删除数组中index索引位置的元素
      *
-     * @param index
+     * @param index 索引
+     * @return E 元素
      */
     public E remove(int index) {
         if (index < 0 || index >= size) {
@@ -186,7 +207,7 @@ public class Array<E> {
     /**
      * 删除数组中的第一个元素
      *
-     * @return
+     * @return E 元素
      */
     public E removeFirst() {
         return remove(0);
@@ -195,10 +216,19 @@ public class Array<E> {
     /**
      * 删除数组中的最后一个位置的元素
      *
-     * @return
+     * @return E 元素
      */
     public E removeLast() {
         return remove(size - 1);
+    }
+
+    public boolean removeElement(E e) {
+        int index = find(e);
+        if (index != -1) {
+            remove(index);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -216,17 +246,19 @@ public class Array<E> {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Array{size=");
-        stringBuilder.append(size);
-        stringBuilder.append("; data=[");
+        StringBuilder sBuilder = new StringBuilder();
+        sBuilder.append("Array{length=");
+        sBuilder.append(getCapacity());
+        sBuilder.append(", size=");
+        sBuilder.append(getSize());
+        sBuilder.append(", data=[");
         for (int i = 0; i < size; i++) {
-            stringBuilder.append(data[i]);
+            sBuilder.append(data[i]);
             if (i != size - 1) {
-                stringBuilder.append(",");
+                sBuilder.append(",");
             }
         }
-        stringBuilder.append("]}");
-        return stringBuilder.toString();
+        sBuilder.append("]}");
+        return sBuilder.toString();
     }
 }
